@@ -2,21 +2,25 @@ import { ShoppingCart, Package, Timer, Coffee } from 'phosphor-react'
 
 import {
   Container,
-  Content,
+  IntroContent,
   InformationsContainer,
   BadgesContainer,
   Badge,
   CoffeesContainer,
+  CoffeesList,
 } from './styles'
 
+import { Card } from './components/Card'
+
 import Image from '../../assets/imagem.png'
+import { coffess } from '../../api/coffees'
 
 import { defaultTheme } from '../../styles/themes/default'
 
 export function Home() {
   return (
     <Container>
-      <Content>
+      <IntroContent>
         <InformationsContainer>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>
           <p>
@@ -58,10 +62,16 @@ export function Home() {
         <div>
           <img src={Image} alt="Imagem de café" />
         </div>
-      </Content>
+      </IntroContent>
 
       <CoffeesContainer>
         <h2>Nosso cafés</h2>
+
+        <CoffeesList>
+          {coffess.map((coffee) => (
+            <Card key={coffee.id} coffee={coffee} />
+          ))}
+        </CoffeesList>
       </CoffeesContainer>
     </Container>
   )

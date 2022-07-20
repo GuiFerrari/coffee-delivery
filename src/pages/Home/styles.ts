@@ -5,17 +5,26 @@ interface BadgeProps {
 }
 
 export const Container = styled.main`
-  max-width: 1120px;
+  max-width: 1152px;
+  padding: 0 1rem;
   margin: 0 auto;
 `
 
-export const Content = styled.div`
+export const IntroContent = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 56px;
 
   margin: 5.875rem 0 6.75rem;
+
+  @media (max-width: 1024px) {
+    > div {
+      &:last-of-type {
+        display: none;
+      }
+    }
+  }
 `
 
 export const InformationsContainer = styled.div`
@@ -34,6 +43,16 @@ export const InformationsContainer = styled.div`
 
     color: ${(props) => props.theme['base-subtitle']};
     margin: 1rem 0 0;
+  }
+
+  @media (max-width: 1024px) {
+    > h1 {
+      text-align: center;
+    }
+
+    > p {
+      text-align: center;
+    }
   }
 `
 
@@ -93,5 +112,20 @@ export const CoffeesContainer = styled.div`
     font-size: 2rem;
     line-height: 130%;
     font-weight: 800;
+  }
+`
+
+export const CoffeesList = styled.div`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 40px;
+  column-gap: 32px;
+
+  margin: 3.375rem 0 0;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, 313px);
   }
 `

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'subtle' | 'cart'
+  variant: 'primary' | 'secondary' | 'subtle' | 'cart' | 'cart-secondary'
 }
 
 export const Container = styled.button<ButtonProps>`
@@ -52,6 +52,16 @@ export const Container = styled.button<ButtonProps>`
 
       &:hover {
         background: ${(props) => props.theme.yellow};
+      }
+    `}
+
+  ${(props) =>
+    props.variant === 'cart-secondary' &&
+    css`
+      background: ${(props) => props.theme['purple-dark']};
+
+      &:hover {
+        background: ${(props) => props.theme.purple};
       }
     `}
 `
