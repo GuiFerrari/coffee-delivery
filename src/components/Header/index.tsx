@@ -1,13 +1,23 @@
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
+import { useTheme } from 'styled-components'
 
-import { HeaderContainer, ButtonsContainer, HeaderContent } from './styles'
+import {
+  HeaderContainer,
+  ButtonsContainer,
+  HeaderContent,
+  CartButton,
+} from './styles'
 
 import { Logo } from '../Logo'
 import { Button } from '../Button'
-import { defaultTheme } from '../../styles/themes/default'
+
+import { useCart } from '../../hooks/useCart'
 
 export function Header() {
+  const { colors } = useTheme()
+  const { cartQuantity } = useCart()
+
   return (
     <HeaderContainer>
       <HeaderContent>
@@ -17,17 +27,18 @@ export function Header() {
 
         <ButtonsContainer>
           <Button variant="secondary">
-            <MapPin size={22} weight="fill" color={defaultTheme.purple} />
+            <MapPin size={22} weight="fill" color={colors.purple} />
             Porto alegre, RS
           </Button>
           <NavLink to="/checkout" title="Checkout">
-            <Button variant="cart">
+            <CartButton>
+              {cartQuantity >= 1 && <span>{cartQuantity}</span>}
               <ShoppingCart
                 size={22}
                 weight="fill"
-                color={defaultTheme['yellow-dark']}
+                color={colors['yellow-dark']}
               />
-            </Button>
+            </CartButton>
           </NavLink>
         </ButtonsContainer>
       </HeaderContent>

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { ShoppingCart } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 
@@ -12,11 +13,13 @@ import {
 } from './styles'
 
 import { Button } from '../../../../components/Button'
+import { QuantityInput } from '../../../../components/QuantityInput'
 
 import { formatMoney } from '../../../../utils/formatMoney'
-import { QuantityInput } from '../../../Checkout/components/QuantityInput'
 
-interface Coffee {
+import { useCart } from '../../../../hooks/useCart'
+
+export interface Coffee {
   id: string
   name: string
   description: string
@@ -30,9 +33,32 @@ interface CardProps {
 }
 
 export function Card({ coffee }: CardProps) {
+  const [quantity, setQuantity] = useState(1)
+
+  const { addCoffeeToCart } = useCart()
   const { colors } = useTheme()
 
+  function handleAddToCart() {
+    const coffeeToAdd = {
+      ...coffee,
+      quantity,
+    }
+
+    addCoffeeToCart(coffeeToAdd)
+  }
+
+  function handleIncrement() {
+    setQuantity((quantityState) => quantityState + 1)
+  }
+
+  function handleDecrement() {
+    setQuantity((quantityState) =>
+      quantityState === 1 ? quantityState : quantityState - 1,
+    )
+  }
+
   const formattedPrice = formatMoney(coffee.price)
+
   return (
     <Container>
       <HeaderContainer>
@@ -57,9 +83,13 @@ export function Card({ coffee }: CardProps) {
         </Price>
 
         <FooterActions>
-          <QuantityInput />
+          <QuantityInput
+            onIncrement={handleIncrement}
+            onDecrement={handleDecrement}
+            quantity={quantity}
+          />
 
-          <Button variant="cart-secondary">
+          <Button variant="cart-secondary" onClick={handleAddToCart}>
             <ShoppingCart size={22} weight="fill" color={colors.white} />
           </Button>
         </FooterActions>
