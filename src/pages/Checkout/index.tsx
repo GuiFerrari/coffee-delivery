@@ -33,7 +33,7 @@ const paymentFormValidationSchema = zod.object({
 
 type PaymentFormData = zod.infer<typeof paymentFormValidationSchema>
 
-export function Checkout() {
+export function CheckoutPage() {
   const { colors } = useTheme()
 
   const paymentForm = useForm<PaymentFormData>({

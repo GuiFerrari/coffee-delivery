@@ -1,11 +1,7 @@
 import { rgba } from 'polished'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import introBackground from '../../../public/intro-background.png'
-
-interface BadgeProps {
-  variant?: 'orange' | 'yellow' | 'purple'
-}
 
 export const Container = styled.main``
 
@@ -34,8 +30,6 @@ export const IntroContent = styled.div`
   gap: 56px;
 
   max-width: 1152px;
-
-  /* margin: 5.875rem 0 6.75rem; */
 
   @media (max-width: 1024px) {
     > div {
@@ -81,46 +75,6 @@ export const BadgesContainer = styled.div`
   row-gap: 12px;
 
   margin: 4.125rem 0 0;
-`
-
-export const Badge = styled.div<BadgeProps>`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  > div {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: ${({ theme }) => theme.colors['base-text']};
-
-    ${(props) =>
-      props.variant === 'orange' &&
-      css`
-        background: ${({ theme }) => theme.colors['yellow-dark']};
-      `}
-
-    ${(props) =>
-      props.variant === 'yellow' &&
-      css`
-        background: ${({ theme }) => theme.colors.yellow};
-      `}
-
-    ${(props) =>
-      props.variant === 'purple' &&
-      css`
-        background: ${({ theme }) => theme.colors.purple};
-      `}
-  }
-
-  > span {
-    line-height: 130%;
-  }
 `
 
 export const CoffeesContainer = styled.div`

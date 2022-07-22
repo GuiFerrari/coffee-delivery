@@ -6,18 +6,16 @@ import {
   IntroContent,
   InformationsContainer,
   BadgesContainer,
-  Badge,
   CoffeesContainer,
   CoffeesList,
 } from './styles'
 
 import { Card } from './components/Card'
+import { Badge } from '../../components/Badge'
 
 import { coffess } from '../../api/coffees'
 
-import { defaultTheme } from '../../styles/themes/default'
-
-export function Home() {
+export function HomePage() {
   return (
     <Container>
       <IntroContainer>
@@ -30,34 +28,25 @@ export function Home() {
             </p>
 
             <BadgesContainer>
-              <Badge variant="orange">
-                <div>
-                  <ShoppingCart
-                    size={16}
-                    weight="fill"
-                    color={defaultTheme.white}
-                  />
-                </div>
-                <span>Compra simples e segura</span>
-              </Badge>
-              <Badge>
-                <div>
-                  <Package size={16} weight="fill" color={defaultTheme.white} />
-                </div>
-                <span>Embalagem mantém o café intacto</span>
-              </Badge>
-              <Badge variant="yellow">
-                <div>
-                  <Timer size={16} weight="fill" color={defaultTheme.white} />
-                </div>
-                <span>Entrega rápida e rastreada</span>
-              </Badge>
-              <Badge variant="purple">
-                <div>
-                  <Coffee size={16} weight="fill" color={defaultTheme.white} />
-                </div>
-                <span>O café chega fresquinho até você</span>
-              </Badge>
+              <Badge
+                variant="orange"
+                icon={<ShoppingCart size={16} weight="fill" />}
+                text="Compra simples e segura"
+              />
+              <Badge
+                icon={<Package size={16} weight="fill" />}
+                text="Embalagem mantém o café intacto"
+              />
+              <Badge
+                variant="yellow"
+                icon={<Timer size={16} weight="fill" />}
+                text="Entrega rápida e rastreada"
+              />
+              <Badge
+                variant="purple"
+                icon={<Coffee size={16} weight="fill" />}
+                text="O café chega fresquinho até você"
+              />
             </BadgesContainer>
           </InformationsContainer>
           <div>
