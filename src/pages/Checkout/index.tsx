@@ -1,10 +1,5 @@
-import {
-  MapPinLine,
-  CurrencyDollar,
-  CreditCard,
-  Bank,
-  Money,
-} from 'phosphor-react'
+import { useTheme } from 'styled-components'
+import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
@@ -13,17 +8,15 @@ import {
   Container,
   OrderBody,
   OrderContainer,
-  OrderHeader,
   OrderBase,
-  PaymentOptionButton,
-  PaymentOptionsContainer,
   SummaryContainer,
 } from './styles'
 
-import { PaymentForm } from './components/PaymentForm'
+import { AddressForm } from './components/AddressForm'
 
-import { useState } from 'react'
-import { useTheme } from 'styled-components'
+import { SectionTitle } from './components/SectionTitle'
+import { PaymentMethods } from './components/PaymentMethods'
+import { Summary } from './components/Summary'
 
 const paymentFormValidationSchema = zod.object({
   cep: zod
@@ -40,15 +33,7 @@ const paymentFormValidationSchema = zod.object({
 
 type PaymentFormData = zod.infer<typeof paymentFormValidationSchema>
 
-enum PaymentTypes {
-  'CARTAO_DE_CREDITO' = 'CARTAO_DE_CREDITO',
-  'CARTAO_DE_DEBITO' = 'CARTAO_DE_DEBITO',
-  'DINHEIRO' = 'DINHEIRO'
-}
-
 export function Checkout() {
-  const [paymentType, setPaymentType] = useState<PaymentTypes | null>(null);
-
   const { colors } = useTheme()
 
   const paymentForm = useForm<PaymentFormData>({
@@ -71,77 +56,36 @@ export function Checkout() {
     reset()
   }
 
-  function handleSelectPaymentOption(paymentSelected: PaymentTypes) {
-    setPaymentType(paymentSelected)
-  }
-
   return (
     <Container>
       <OrderContainer>
         <h2>Complete seu pedido</h2>
 
         <OrderBase>
-          <OrderHeader>
-            <div>
-              <MapPinLine size={22} color={colors['yellow-dark']} />
-            </div>
-            <div>
-              <h4>Endereço de entrega</h4>
-              <span>Informe o endereço onde deseja receber seu pedido</span>
-            </div>
-          </OrderHeader>
+          <SectionTitle
+            title="Endereço de entrega"
+            subtitle="Informe o endereço onde deseja receber seu pedido"
+            icon={<MapPinLine size={22} color={colors['yellow-dark']} />}
+          />
 
           <OrderBody>
             <form onSubmit={handleSubmit(handleCreatePayment)}>
               <FormProvider {...paymentForm}>
-                <PaymentForm />
+                <AddressForm />
               </FormProvider>
             </form>
           </OrderBody>
         </OrderBase>
 
         <OrderBase>
-          <OrderHeader>
-            <div>
-              <CurrencyDollar size={22} color={colors.purple} />
-            </div>
-            <div>
-              <h4>Pagamento</h4>
-              <span>
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
-              </span>
-            </div>
-          </OrderHeader>
+          <SectionTitle
+            title="Pagamento"
+            subtitle="O pagamento é feito na entrega. Escolha a forma que deseja pagar"
+            icon={<CurrencyDollar size={22} color={colors.purple} />}
+          />
 
           <OrderBody>
-            <PaymentOptionsContainer>
-              <PaymentOptionButton
-                type="button"
-                onClick={() => handleSelectPaymentOption(PaymentTypes.CARTAO_DE_CREDITO)}
-                active={paymentType === PaymentTypes.CARTAO_DE_CREDITO}
-              >
-                <CreditCard size={16} color={colors.purple} />
-                <span>Cartão de crédito</span>
-              </PaymentOptionButton>
-
-              <PaymentOptionButton
-                type="button"
-                onClick={() => handleSelectPaymentOption(PaymentTypes.CARTAO_DE_DEBITO)}
-                active={paymentType === PaymentTypes.CARTAO_DE_DEBITO}
-              >
-                <Bank size={16} color={colors.purple} />
-                <span>Cartão de débito</span>
-              </PaymentOptionButton>
-
-              <PaymentOptionButton
-                type="button"
-                onClick={() => handleSelectPaymentOption(PaymentTypes.DINHEIRO)}
-                active={paymentType === PaymentTypes.DINHEIRO}
-              >
-                <Money size={16} color={colors.purple} />
-                <span>Dinheiro</span>
-              </PaymentOptionButton>
-            </PaymentOptionsContainer>
+            <PaymentMethods />
           </OrderBody>
         </OrderBase>
       </OrderContainer>
@@ -149,7 +93,7 @@ export function Checkout() {
       <SummaryContainer>
         <h2>Cafés selecionados</h2>
 
-        <div>Aqui</div>
+        <Summary />
       </SummaryContainer>
     </Container>
   )

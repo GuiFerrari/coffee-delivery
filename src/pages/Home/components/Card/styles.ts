@@ -92,38 +92,3 @@ export const FooterActions = styled.div`
   justify-content: center;
   gap: 8px;
 `
-
-export const Count = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-
-  height: 2.375rem;
-  padding: 0.5rem;
-  border-radius: 6px;
-  background: ${({ theme }) => theme.colors['base-button']};
-
-  > button {
-    background: none;
-    outline: none;
-    border: none;
-
-    cursor: pointer;
-  }
-
-  > span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 21px;
-
-    font-size: 1rem;
-    line-height: 130%;
-    font-weight: 400;
-
-    color: ${({ theme }) => theme.colors['base-title']};
-    text-align: center;
-  }
-`

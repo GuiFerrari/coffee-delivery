@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { ShoppingCart, Minus, Plus } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
+import { useTheme } from 'styled-components'
 
 import {
   Container,
@@ -9,14 +9,12 @@ import {
   FooterContainer,
   Price,
   FooterActions,
-  Count,
 } from './styles'
 
 import { Button } from '../../../../components/Button'
 
-import { defaultTheme } from '../../../../styles/themes/default'
-
 import { formatMoney } from '../../../../utils/formatMoney'
+import { QuantityInput } from '../../../Checkout/components/QuantityInput'
 
 interface Coffee {
   id: string
@@ -32,18 +30,9 @@ interface CardProps {
 }
 
 export function Card({ coffee }: CardProps) {
-  const [count, setCount] = useState(1)
+  const { colors } = useTheme()
 
   const formattedPrice = formatMoney(coffee.price)
-
-  function incrementCount() {
-    setCount((count) => count + 1)
-  }
-
-  function decrementCount() {
-    setCount((count) => (count === 1 ? count : count - 1))
-  }
-
   return (
     <Container>
       <HeaderContainer>
@@ -68,20 +57,10 @@ export function Card({ coffee }: CardProps) {
         </Price>
 
         <FooterActions>
-          <Count>
-            <button type="button" onClick={decrementCount}>
-              <Minus size={14} weight="bold" color={defaultTheme.purple} />
-            </button>
-
-            <span>{count}</span>
-
-            <button type="button" onClick={incrementCount}>
-              <Plus size={14} weight="bold" color={defaultTheme.purple} />
-            </button>
-          </Count>
+          <QuantityInput />
 
           <Button variant="cart-secondary">
-            <ShoppingCart size={22} weight="fill" color={defaultTheme.white} />
+            <ShoppingCart size={22} weight="fill" color={colors.white} />
           </Button>
         </FooterActions>
       </FooterContainer>
