@@ -16,15 +16,15 @@ export const Container = styled.button<ButtonProps>`
   border-radius: 6px;
 
   font-size: 0.875rem;
-  color: ${(props) => props.theme.white};
+  color: ${({ theme }) => theme.colors.white};
 
   cursor: pointer;
   transition: background-color 0.15s ease-in-out;
 
-  background: ${(props) => props.theme.yellow};
+  background: ${({ theme }) => theme.colors.yellow};
 
   &:hover {
-    background: ${(props) => props.theme['yellow-dark']};
+    background: ${({ theme }) => theme.colors['yellow-dark']};
   }
 
   ${(props) =>
@@ -37,31 +37,31 @@ export const Container = styled.button<ButtonProps>`
   ${(props) =>
     props.variant === 'secondary' &&
     css`
-      background: ${(props) => props.theme['purple-light']};
-      color: ${(props) => props.theme['purple-dark']};
+      background: ${({ theme }) => theme.colors['purple-light']};
+      color: ${({ theme }) => theme.colors['purple-dark']};
 
       &:hover {
-        background: ${(props) => props.theme['purple-light-hover']};
+        background: ${({ theme }) => theme.colors['purple-light-hover']};
       }
     `}
 
   ${(props) =>
     props.variant === 'cart' &&
     css`
-      background: ${(props) => props.theme['yellow-light']};
+      background: ${({ theme }) => theme.colors['yellow-light']};
 
       &:hover {
-        background: ${(props) => props.theme.yellow};
+        background: ${({ theme }) => theme.colors.yellow};
       }
     `}
 
   ${(props) =>
     props.variant === 'cart-secondary' &&
     css`
-      background: ${(props) => props.theme['purple-dark']};
+      background: ${({ theme }) => theme.colors['purple-dark']};
 
       &:hover {
-        background: ${(props) => props.theme.purple};
+        background: ${({ theme }) => theme.colors.purple};
       }
     `}
 `

@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: ${(props) => props.theme['base-card']};
+  background: ${({ theme }) => theme.colors['base-card']};
   padding: 1.25rem;
   border-radius: 6px 36px;
 `
@@ -29,7 +29,7 @@ export const BodyContainer = styled.div`
     line-height: 130%;
     font-weight: 700;
 
-    color: ${(props) => props.theme['base-subtitle']};
+    color: ${({ theme }) => theme.colors['base-subtitle']};
     text-align: center;
 
     margin: 1rem 0 0.5rem;
@@ -40,7 +40,7 @@ export const BodyContainer = styled.div`
     line-height: 130%;
     font-weight: 400;
 
-    color: ${(props) => props.theme['base-label']};
+    color: ${({ theme }) => theme.colors['base-label']};
     text-align: center;
   }
 `
@@ -54,12 +54,12 @@ export const Tags = styled.div`
     line-height: 130%;
     font-weight: 700;
 
-    color: ${(props) => props.theme['yellow-dark']};
+    color: ${({ theme }) => theme.colors['yellow-dark']};
     text-align: center;
     text-transform: uppercase;
 
     padding: 4px 8px;
-    background: ${(props) => props.theme['yellow-light']};
+    background: ${({ theme }) => theme.colors['yellow-light']};
     border-radius: 100px;
   }
 `
@@ -76,7 +76,7 @@ export const Price = styled.span`
   line-height: 130%;
   font-weight: 400;
 
-  color: ${(props) => props.theme['base-text']};
+  color: ${({ theme }) => theme.colors['base-text']};
 
   > strong {
     font-family: 'Baloo 2', cursive;
@@ -102,7 +102,7 @@ export const Count = styled.div`
   height: 2.375rem;
   padding: 0.5rem;
   border-radius: 6px;
-  background: ${(props) => props.theme['base-button']};
+  background: ${({ theme }) => theme.colors['base-button']};
 
   > button {
     background: none;
@@ -123,7 +123,7 @@ export const Count = styled.div`
     line-height: 130%;
     font-weight: 400;
 
-    color: ${(props) => props.theme['base-title']};
+    color: ${({ theme }) => theme.colors['base-title']};
     text-align: center;
   }
 `

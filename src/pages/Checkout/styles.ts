@@ -28,14 +28,14 @@ export const OrderContainer = styled.div`
     line-height: 130%;
 
     margin: 0 0 1rem;
-    color: ${(props) => props.theme['base-subtitle']};
+    color: ${({ theme }) => theme.colors['base-subtitle']};
   }
+`
 
-  > div {
-    background: ${(props) => props.theme['base-card']};
-    padding: 2.5rem;
-    border-radius: 6px;
-  }
+export const OrderBase = styled.div`
+  background: ${({ theme }) => theme.colors['base-card']};
+  padding: 2.5rem;
+  border-radius: 6px;
 `
 
 export const OrderHeader = styled.div`
@@ -50,7 +50,7 @@ export const OrderHeader = styled.div`
       line-height: 130%;
       font-weight: 400;
 
-      color: ${(props) => props.theme['base-subtitle']};
+      color: ${({ theme }) => theme.colors['base-subtitle']};
     }
 
     > span {
@@ -58,7 +58,7 @@ export const OrderHeader = styled.div`
       line-height: 130%;
       font-weight: 400;
 
-      color: ${(props) => props.theme['base-text']};
+      color: ${({ theme }) => theme.colors['base-text']};
     }
   }
 `
@@ -84,28 +84,28 @@ export const PaymentOptionButton = styled.button<PaymentOptionButtonProps>`
   outline: none;
   padding: 1.25rem;
   border-radius: 6px;
-  background: ${(props) => props.theme['base-button']};
+  background: ${({ theme }) => theme.colors['base-button']};
 
   font-size: 0.75rem;
   line-height: 130%;
   font-weight: 400;
   text-transform: uppercase;
-  color: ${(props) => props.theme['base-text']};
+  color: ${({ theme }) => theme.colors['base-text']};
 
   cursor: pointer;
 
   &:hover {
-    background: ${(props) => props.theme['base-hover']};
+    background: ${({ theme }) => theme.colors['base-hover']};
   }
 
   ${(props) =>
     props.active &&
     css`
-      border: 1px solid ${(props) => props.theme.purple};
-      background: ${(props) => props.theme['purple-light']};
+      border: 1px solid ${({ theme }) => theme.colors.purple};
+      background: ${({ theme }) => theme.colors['purple-light']};
 
       &:hover {
-        background: ${(props) => props.theme['purple-light']};
+        background: ${({ theme }) => theme.colors['purple-light']};
       }
     `}
 `
@@ -119,11 +119,11 @@ export const SummaryContainer = styled.div`
     line-height: 130%;
 
     margin: 0 0 1rem;
-    color: ${(props) => props.theme['base-subtitle']};
+    color: ${({ theme }) => theme.colors['base-subtitle']};
   }
 
   > div {
-    background: ${(props) => props.theme['base-card']};
+    background: ${({ theme }) => theme.colors['base-card']};
     padding: 1.25rem;
     border-radius: 6px 36px;
   }

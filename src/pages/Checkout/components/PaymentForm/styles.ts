@@ -21,22 +21,22 @@ export const Grid2 = styled.div`
 `
 
 const BaseInput = styled.input`
-  background: ${(props) => props.theme['base-input']};
+  background: ${({ theme }) => theme.colors['base-input']};
   padding: 12px;
-  border: 2px solid ${(props) => props.theme['base-button']};
+  border: 2px solid ${({ theme }) => theme.colors['base-button']};
   border-radius: 6px;
 
   font-size: 0.875rem;
   line-height: 130%;
   font-weight: 400;
-  color: ${(props) => props.theme['base-text']};
+  color: ${({ theme }) => theme.colors['base-text']};
 
   &:focus {
     box-shadow: none;
   }
 
   &::placeholder {
-    color: ${(props) => props.theme['base-label']};
+    color: ${({ theme }) => theme.colors['base-label']};
   }
 `
 

@@ -12,12 +12,12 @@ export const Container = styled.main``
 export const IntroContainer = styled.div`
   width: 100%;
   height: 34rem;
-  background: ${(props) => `url(${introBackground}) no-repeat center,
+  background: ${({ theme }) => `url(${introBackground}) no-repeat center,
     linear-gradient(
       0deg,
-      ${props.theme.white} 0%,
-      ${rgba(props.theme.background, 0.2)} 50%,
-      ${props.theme.background} 100%
+      ${theme.colors.white} 0%,
+      ${rgba(theme.colors.background, 0.2)} 50%,
+      ${theme.colors.background} 100%
     )
   `};
   background-size: cover;
@@ -53,14 +53,14 @@ export const InformationsContainer = styled.div`
     line-height: 130%;
     font-weight: 800;
 
-    color: ${(props) => props.theme['base-title']};
+    color: ${({ theme }) => theme.colors['base-title']};
   }
 
   > p {
     font-size: 1.25rem;
     line-height: 130%;
 
-    color: ${(props) => props.theme['base-subtitle']};
+    color: ${({ theme }) => theme.colors['base-subtitle']};
     margin: 1rem 0 0;
   }
 
@@ -97,24 +97,24 @@ export const Badge = styled.div<BadgeProps>`
     align-items: center;
     justify-content: center;
 
-    background: ${(props) => props.theme['base-text']};
+    background: ${({ theme }) => theme.colors['base-text']};
 
     ${(props) =>
       props.variant === 'orange' &&
       css`
-        background: ${(props) => props.theme['yellow-dark']};
+        background: ${({ theme }) => theme.colors['yellow-dark']};
       `}
 
     ${(props) =>
       props.variant === 'yellow' &&
       css`
-        background: ${(props) => props.theme.yellow};
+        background: ${({ theme }) => theme.colors.yellow};
       `}
 
     ${(props) =>
       props.variant === 'purple' &&
       css`
-        background: ${(props) => props.theme.purple};
+        background: ${({ theme }) => theme.colors.purple};
       `}
   }
 

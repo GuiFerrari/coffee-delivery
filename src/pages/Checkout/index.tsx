@@ -14,6 +14,7 @@ import {
   OrderBody,
   OrderContainer,
   OrderHeader,
+  OrderBase,
   PaymentOptionButton,
   PaymentOptionsContainer,
   SummaryContainer,
@@ -21,8 +22,8 @@ import {
 
 import { PaymentForm } from './components/PaymentForm'
 
-import { defaultTheme } from '../../styles/themes/default'
 import { useState } from 'react'
+import { useTheme } from 'styled-components'
 
 const paymentFormValidationSchema = zod.object({
   cep: zod
@@ -47,6 +48,8 @@ enum PaymentTypes {
 
 export function Checkout() {
   const [paymentType, setPaymentType] = useState<PaymentTypes | null>(null);
+
+  const { colors } = useTheme()
 
   const paymentForm = useForm<PaymentFormData>({
     resolver: zodResolver(paymentFormValidationSchema),
@@ -77,10 +80,10 @@ export function Checkout() {
       <OrderContainer>
         <h2>Complete seu pedido</h2>
 
-        <div>
+        <OrderBase>
           <OrderHeader>
             <div>
-              <MapPinLine size={22} color={defaultTheme['yellow-dark']} />
+              <MapPinLine size={22} color={colors['yellow-dark']} />
             </div>
             <div>
               <h4>Endereço de entrega</h4>
@@ -95,12 +98,12 @@ export function Checkout() {
               </FormProvider>
             </form>
           </OrderBody>
-        </div>
+        </OrderBase>
 
-        <div>
+        <OrderBase>
           <OrderHeader>
             <div>
-              <CurrencyDollar size={22} color={defaultTheme.purple} />
+              <CurrencyDollar size={22} color={colors.purple} />
             </div>
             <div>
               <h4>Pagamento</h4>
@@ -117,7 +120,7 @@ export function Checkout() {
                 onClick={() => handleSelectPaymentOption(PaymentTypes.CARTAO_DE_CREDITO)}
                 active={paymentType === PaymentTypes.CARTAO_DE_CREDITO}
               >
-                <CreditCard size={16} color={defaultTheme.purple} />
+                <CreditCard size={16} color={colors.purple} />
                 <span>Cartão de crédito</span>
               </PaymentOptionButton>
 
@@ -126,7 +129,7 @@ export function Checkout() {
                 onClick={() => handleSelectPaymentOption(PaymentTypes.CARTAO_DE_DEBITO)}
                 active={paymentType === PaymentTypes.CARTAO_DE_DEBITO}
               >
-                <Bank size={16} color={defaultTheme.purple} />
+                <Bank size={16} color={colors.purple} />
                 <span>Cartão de débito</span>
               </PaymentOptionButton>
 
@@ -135,12 +138,12 @@ export function Checkout() {
                 onClick={() => handleSelectPaymentOption(PaymentTypes.DINHEIRO)}
                 active={paymentType === PaymentTypes.DINHEIRO}
               >
-                <Money size={16} color={defaultTheme.purple} />
+                <Money size={16} color={colors.purple} />
                 <span>Dinheiro</span>
               </PaymentOptionButton>
             </PaymentOptionsContainer>
           </OrderBody>
-        </div>
+        </OrderBase>
       </OrderContainer>
 
       <SummaryContainer>
