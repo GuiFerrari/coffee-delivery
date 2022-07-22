@@ -1,22 +1,41 @@
+import { rgba } from 'polished'
 import styled, { css } from 'styled-components'
+
+import introBackground from '../../../public/intro-background.png'
 
 interface BadgeProps {
   variant?: 'orange' | 'yellow' | 'purple'
 }
 
-export const Container = styled.main`
-  max-width: 1152px;
-  padding: 0 1rem;
-  margin: 0 auto;
+export const Container = styled.main``
+
+export const IntroContainer = styled.div`
+  width: 100%;
+  height: 34rem;
+  background: ${(props) => `url(${introBackground}) no-repeat center,
+    linear-gradient(
+      0deg,
+      ${props.theme.white} 0%,
+      ${rgba(props.theme.background, 0.2)} 50%,
+      ${props.theme.background} 100%
+    )
+  `};
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const IntroContent = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 56px;
 
-  margin: 5.875rem 0 6.75rem;
+  max-width: 1152px;
+
+  /* margin: 5.875rem 0 6.75rem; */
 
   @media (max-width: 1024px) {
     > div {
@@ -105,7 +124,8 @@ export const Badge = styled.div<BadgeProps>`
 `
 
 export const CoffeesContainer = styled.div`
-  margin: 2rem 0;
+  max-width: 1152px;
+  margin: 2rem auto;
 
   > h2 {
     font-family: 'Baloo 2', cursive;

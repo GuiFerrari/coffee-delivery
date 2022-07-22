@@ -1,14 +1,24 @@
 import styled from 'styled-components'
 
-export const Container = styled.header`
+export const HeaderContainer = styled.header`
+  width: 100%;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  background: ${(props) => props.theme.background};
+`
+
+export const HeaderContent = styled.div`
+  max-width: 1152px;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  max-width: 1152px;
-
-  padding: 2rem 1rem;
-  margin: 0 auto;
 `
 
 export const ButtonsContainer = styled.div`

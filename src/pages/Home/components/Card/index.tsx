@@ -12,9 +12,11 @@ import {
   Count,
 } from './styles'
 
-import { Button } from '../../../components/Button'
+import { Button } from '../../../../components/Button'
 
-import { defaultTheme } from '../../../styles/themes/default'
+import { defaultTheme } from '../../../../styles/themes/default'
+
+import { formatMoney } from '../../../../utils/formatMoney'
 
 interface Coffee {
   id: string
@@ -32,6 +34,8 @@ interface CardProps {
 export function Card({ coffee }: CardProps) {
   const [count, setCount] = useState(1)
 
+  const formattedPrice = formatMoney(coffee.price)
+
   function incrementCount() {
     setCount((count) => count + 1)
   }
@@ -43,7 +47,7 @@ export function Card({ coffee }: CardProps) {
   return (
     <Container>
       <HeaderContainer>
-        <img src={coffee.image} alt={coffee.name} />
+        <img src={`/coffees/${coffee.image}`} alt={coffee.name} />
       </HeaderContainer>
 
       <BodyContainer>
@@ -60,7 +64,7 @@ export function Card({ coffee }: CardProps) {
       <FooterContainer>
         <Price>
           R$
-          <strong>{' ' + coffee.price}</strong>
+          <strong>{' ' + formattedPrice}</strong>
         </Price>
 
         <FooterActions>
