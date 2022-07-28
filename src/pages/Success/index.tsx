@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import { MapPin, Timer, CurrencyDollar } from 'phosphor-react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import {
   SuccessContainer,
@@ -10,7 +12,25 @@ import {
 import { Badge } from '../../components/Badge'
 import { Illustration } from '../../components/Illustration'
 
+import { PaymentFormData } from '../Checkout'
+import { paymentMethods } from '../Checkout/components/PaymentMethods'
+
+interface LocationType {
+  state: PaymentFormData
+}
+
 export function SuccessPage() {
+  const { state } = useLocation() as unknown as LocationType
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/')
+    }
+  }, [navigate, state])
+
+  if (!state) return <></>
+
   return (
     <SuccessContainer>
       <SuccessHeader>
@@ -25,9 +45,12 @@ export function SuccessPage() {
             icon={<MapPin size={16} weight="fill" />}
             text={
               <BadgeText>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>
+                  {state.street}, {state.number}
+                </strong>
                 <br />
-                Farrapos - Porto Alegre, RS
+                {state.district} - {state.city}, {state.uf}
               </BadgeText>
             }
           />
@@ -51,7 +74,7 @@ export function SuccessPage() {
               <BadgeText>
                 Pagamento na entrega
                 <br />
-                <strong>Cartão de crédito</strong>
+                <strong>{paymentMethods[state.paymentMethod].label}</strong>
               </BadgeText>
             }
           />

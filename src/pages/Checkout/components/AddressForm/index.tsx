@@ -1,42 +1,79 @@
-// import { useFormContext } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 
 import { AddressFormContainer } from './styles'
 
-import { Input } from '../../../../components/Input'
+import Input from '../../../../components/Input'
+
+interface ErrorsType {
+  errors: {
+    [key: string]: {
+      message: string
+    }
+  }
+}
 
 export function AddressForm() {
-  // const { register } = useFormContext()
+  const { register, formState } = useFormContext()
+
+  const { errors } = formState as unknown as ErrorsType
 
   return (
     <AddressFormContainer>
-      <Input id="cep" type="number" placeholder="CEP" className="cep" />
-
-      <Input id="street" type="text" placeholder="Rua" className="street" />
+      <Input
+        placeholder="CEP"
+        className="cep"
+        {...register('cep')}
+        error={errors.cep?.message}
+      />
 
       <Input
-        id="number"
+        type="text"
+        placeholder="Rua"
+        className="street"
+        {...register('street')}
+        error={errors.street?.message}
+      />
+
+      <Input
         type="number"
         placeholder="Número"
         className="number"
+        {...register('number')}
+        error={errors.number?.message}
       />
 
       <Input
-        id="complement"
         type="text"
         placeholder="Complemento"
         className="complement"
+        {...register('complement')}
+        error={errors.complement?.message}
+        rightText="Opcional"
       />
 
       <Input
-        id="neighborhood"
         type="text"
         placeholder="Bairro"
-        className="neighborhood"
+        className="district"
+        {...register('district')}
+        error={errors.district?.message}
       />
 
-      <Input id="city" type="text" placeholder="Cidade" className="city" />
+      <Input
+        type="text"
+        placeholder="Cidade"
+        className="city"
+        {...register('city')}
+        error={errors.city?.message}
+      />
 
-      <Input id="uf" type="text" placeholder="UF" className="uf" />
+      <Input
+        type="text"
+        placeholder="UF"
+        className="uf"
+        {...register('uf')}
+        error={errors.uf?.message}
+      />
     </AddressFormContainer>
   )
 }

@@ -16,7 +16,7 @@ export function Summary() {
 
       <Amount />
 
-      <ConfirmButton disabled={cartQuantity <= 0}>
+      <ConfirmButton disabled={cartQuantity <= 0} type="submit">
         Confirmar pedido
       </ConfirmButton>
     </SummaryContainer>

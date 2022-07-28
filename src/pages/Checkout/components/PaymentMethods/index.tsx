@@ -1,53 +1,46 @@
 import { Bank, CreditCard, Money } from 'phosphor-react'
-import { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
-import { PaymentMethodsContainer, PaymentItem } from './styles'
+import { PaymentMethodsContainer } from './styles'
 
-enum PaymentTypes {
-  'CARTAO_DE_CREDITO' = 'CARTAO_DE_CREDITO',
-  'CARTAO_DE_DEBITO' = 'CARTAO_DE_DEBITO',
-  'DINHEIRO' = 'DINHEIRO'
+import PaymentMethodInput from '../PaymentMethodInput'
+
+export const paymentMethods = {
+  credit: {
+    label: 'Cartão de crédito',
+    icon: <CreditCard size={16} />,
+  },
+  debit: {
+    label: 'Cartão de débito',
+    icon: <Bank size={16} />,
+  },
+  money: {
+    label: 'Dinheiro',
+    icon: <Money size={16} />,
+  },
 }
 
 export function PaymentMethods() {
-  const [paymentType, setPaymentType] = useState<PaymentTypes | null>(null)
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext()
 
-  function handleSelectPaymentOption(paymentSelected: PaymentTypes) {
-    setPaymentType(paymentSelected)
-  }
+  const paymentMethodError = errors?.paymentMethod?.message as unknown as string
 
   return (
     <PaymentMethodsContainer>
-      <PaymentItem
-        type="button"
-        onClick={() =>
-          handleSelectPaymentOption(PaymentTypes.CARTAO_DE_CREDITO)
-        }
-        active={paymentType === PaymentTypes.CARTAO_DE_CREDITO}
-      >
-        <CreditCard size={16} />
-        <span>Cartão de crédito</span>
-      </PaymentItem>
-
-      <PaymentItem
-        type="button"
-        onClick={() =>
-          handleSelectPaymentOption(PaymentTypes.CARTAO_DE_DEBITO)
-        }
-        active={paymentType === PaymentTypes.CARTAO_DE_DEBITO}
-      >
-        <Bank size={16} />
-        <span>Cartão de débito</span>
-      </PaymentItem>
-
-      <PaymentItem
-        type="button"
-        onClick={() => handleSelectPaymentOption(PaymentTypes.DINHEIRO)}
-        active={paymentType === PaymentTypes.DINHEIRO}
-      >
-        <Money size={16} />
-        <span>Dinheiro</span>
-      </PaymentItem>
+      {Object.entries(paymentMethods).map(([key, { label, icon }]) => (
+        <PaymentMethodInput
+          key={key}
+          id={key}
+          icon={icon}
+          label={label}
+          value={key}
+          {...register('paymentMethod')}
+        />
+      ))}
+      {paymentMethodError && <p>{paymentMethodError}</p>}
     </PaymentMethodsContainer>
   )
 }
